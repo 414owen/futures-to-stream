@@ -24,10 +24,8 @@
             exa
             fd
             rust-bin.beta.latest.default
-            # rust-bin.nightly.latest.default
-          ];
-          buildTools = [
             cargo-edit
+            # rust-bin.nightly.latest.default
           ];
 
           shellHook = ''
