@@ -1,0 +1,18 @@
+[package]
+name = "futures-to-stream"
+version = "0.1.0"
+edition = "2021"
+authors = ["Owen Shepherd <owen@owen.cafe>"]
+description = "Turn heterogeneous Futures of same associated Output type to a stream"
+keywords = ["streams", "futures", "async", "asynchronous", "macro"]
+categories = ["asynchronous"]
+license = "MIT"
+homepage = "https://github.com/414owen/futures-to-stream/"
+repository = "https://github.com/414owen/futures-to-stream/"
+readme = "README.md"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+futures = "~0.3"
+tokio = {version = "~1", features = ["rt", "macros"]}
