@@ -1,12 +1,13 @@
-macro_rules! _futs {
-  () => {
+#[macro_export]
+macro_rules! futures_to_stream {
+  (impl) => {
     {
       use std::option::*;
       use futures::future::Either;
       Some(Either::Right(empty())).into_iter()
     }
   };
-  ($x:expr) => {
+  (impl $x:expr) => {
     {
       use futures::future::Either;
       fn left<A>(a: A) -> Either<A, A> {
@@ -15,25 +16,21 @@ macro_rules! _futs {
       Some(left($x)).into_iter()
     }
   };
-  ( $x:expr, $($tail:expr),* ) => {
+  (impl $x:expr, $($tail:expr),*) => {
     {
       use futures::future::Either;
       use std::iter::Iterator;
 
       Some(Either::Left($x)).into_iter().chain(
-        _futs!($($tail),*).map(Either::Right)
+        futures_to_stream!(impl $($tail),*).map(Either::Right)
       )
     }
   };
-}
-
-#[macro_export]
-macro_rules! futures_to_stream {
-  ( $($tail:tt)* ) => {
+  ($($tail:tt)*) => {
     {
       use futures::stream::FuturesOrdered;
 
-      let fs = _futs!($($tail)*);
+      let fs = futures_to_stream!(impl $($tail)*);
       FuturesOrdered::from_iter(fs)
     }
   }
