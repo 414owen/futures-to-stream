@@ -1,11 +1,17 @@
+use futures::future::Future;
+use futures::stream::Stream;
+
 pub mod internal {
     use futures::future::Either;
 
+    /// Create an `Either<A, A>::Left` from an `A`
     pub fn left_homogenous<A>(a: A) -> Either<A, A> {
         Either::Left(a)
     }
 }
 
+/// Create an iterator of homogeneous [`Future`]s from a set of heterogeneous futures
+/// with the same associated [`Output`](Future::Output) type.
 #[macro_export]
 macro_rules! create_homogeneous_future {
   () => {
@@ -32,6 +38,8 @@ macro_rules! create_homogeneous_future {
   };
 }
 
+/// Create a [`Stream`] from a set of [`Future`]s, where all yielded [`Item`](Stream::Item)s are in the
+/// order of their presented [`Future`]s.
 #[macro_export]
 macro_rules! futures_to_ordered_stream {
   ($($tail:tt)*) => {
@@ -44,6 +52,7 @@ macro_rules! futures_to_ordered_stream {
   }
 }
 
+/// Create a [`Stream`] from a set of [`Future`]s, where [`Item`](Stream::Item)s may be yielded in any order.
 #[macro_export]
 macro_rules! futures_to_unordered_stream {
   ($($tail:tt)*) => {
