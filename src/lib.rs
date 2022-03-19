@@ -1,7 +1,9 @@
-use futures::future::Either;
+pub mod util {
+  use futures::future::Either;
 
-pub fn left_homogenous<A>(a: A) -> Either<A, A> {
-  Either::Left(a)
+  pub fn left_homogenous<A>(a: A) -> Either<A, A> {
+    Either::Left(a)
+  }
 }
 
 #[macro_export]
@@ -15,7 +17,7 @@ macro_rules! futures_to_stream {
   };
   (impl $x:expr) => {
     {
-      Some($crate::left_homogenous($x)).into_iter()
+      Some($crate::util::left_homogenous($x)).into_iter()
     }
   };
   (impl $x:expr, $($tail:expr),*) => {
