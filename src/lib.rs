@@ -1,8 +1,5 @@
 //! Macros to create streams from heterogeneous futures
 
-use futures::future::Future;
-use futures::stream::Stream;
-
 pub mod internal {
     use futures::future::Either;
 
@@ -13,7 +10,11 @@ pub mod internal {
 }
 
 /// Create an iterator of homogeneous [`Future`]s from a set of heterogeneous futures
-/// with the same associated [`Output`](Future::Output) type.
+/// with the same associated [`Output`] type.
+///
+/// [`Future`]: futures::future::Future
+/// [`Stream`]: futures::stream::Stream
+/// [`Output`]: futures::future::Future::Output
 #[macro_export]
 macro_rules! create_homogeneous_future {
   () => {
@@ -40,8 +41,12 @@ macro_rules! create_homogeneous_future {
   };
 }
 
-/// Create a [`Stream`] from a set of [`Future`]s, where all yielded [`Item`](Stream::Item)s are in the
+/// Create a [`Stream`] from a set of [`Future`]s, where all yielded [`Item`]s are in the
 /// order of their presented [`Future`]s.
+///
+/// [`Future`]: futures::future::Future
+/// [`Stream`]: futures::stream::Stream
+/// [`Item`]: futures::stream::Stream::Item
 #[macro_export]
 macro_rules! futures_to_ordered_stream {
   ($($tail:tt)*) => {
@@ -54,7 +59,11 @@ macro_rules! futures_to_ordered_stream {
   }
 }
 
-/// Create a [`Stream`] from a set of [`Future`]s, where [`Item`](Stream::Item)s may be yielded in any order.
+/// Create a [`Stream`] from a set of [`Future`]s, where [`Item`]s may be yielded in any order.
+///
+/// [`Future`]: futures::future::Future
+/// [`Stream`]: futures::stream::Stream
+/// [`Item`]: futures::stream::Stream::Item
 #[macro_export]
 macro_rules! futures_to_unordered_stream {
   ($($tail:tt)*) => {
