@@ -1,3 +1,5 @@
+//! Macros to create streams from heterogeneous futures
+
 use futures::future::Future;
 use futures::stream::Stream;
 

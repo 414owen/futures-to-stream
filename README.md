@@ -1,5 +1,24 @@
 # Futures to stream
 
+Macros to create streams from heterogeneous futures
+
+## Usage
+
+```
+async fn test1() -> u8 { 1 }
+async fn test2() -> u8 { 2 }
+async fn test3() -> u8 { 3 }
+async fn test4() -> u8 { 4 }
+
+fn ordered_stream() -> impl Stream<Item = u8> {
+  futures_to_ordered_stream!(test1(), test2(), test3(), test4())
+}
+
+fn unordered_stream() -> impl Stream<Item = u8> {
+  futures_to_unordered_stream!(test1(), test2(), test3(), test4())
+}
+```
+
 ## Goal
 
 To allow the creation of a stream from heterogeneous
@@ -82,21 +101,7 @@ fn to_stream() -> impl Stream<Item = ()> {
 }
 ```
 
-With four, it's already pretty unwieldy. Luckily, this package exports a macro to
-generate this all for you:
+With four, it's already pretty unwieldy. Luckily, this package exports macros to
+generate this all for you.
 
-```
-async fn test1() -> () { () }
-async fn test2() -> () { () }
-async fn test3() -> () { () }
-async fn test4() -> () { () }
-
-fn to_stream() -> impl Stream<Item = ()> {
-  futures_to_stream!(
-    test1(),
-    test2(),
-    test3(),
-    test4()
-  )
-}
-```
+[Back to `Usage`](#Usage)

@@ -25,6 +25,7 @@
             fd
             rust-bin.beta.latest.default
             cargo-edit
+            cargo-readme
             # rust-bin.nightly.latest.default
           ];
 
