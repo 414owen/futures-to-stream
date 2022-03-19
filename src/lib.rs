@@ -1,19 +1,21 @@
+use futures::future::Either;
+
+pub fn left_homogenous<A>(a: A) -> Either<A, A> {
+  Either::Left(a)
+}
+
 #[macro_export]
 macro_rules! futures_to_stream {
   (impl) => {
     {
       use std::option::*;
       use futures::future::Either;
-      Some(Either::Right(empty())).into_iter()
+      Either::Right(empty())
     }
   };
   (impl $x:expr) => {
     {
-      use futures::future::Either;
-      fn left<A>(a: A) -> Either<A, A> {
-        Either::Left(a)
-      }
-      Some(left($x)).into_iter()
+      Some($crate::left_homogenous($x)).into_iter()
     }
   };
   (impl $x:expr, $($tail:expr),*) => {
