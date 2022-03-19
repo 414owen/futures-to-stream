@@ -1,7 +1,7 @@
 # Futures to stream
 
-![example workflow](https://github.com/414owen/futures-to-stream/actions/workflows/ci.yml/badge.svg)
-![crates.io](https://img.shields.io/crates/v/futures-to-stream.svg)
+[![CI Tests](https://github.com/414owen/futures-to-stream/actions/workflows/ci.yml/badge.svg)](https://github.com/414owen/futures-to-stream/actions/workflows/ci.yml)
+[![crates.io](https://img.shields.io/crates/v/futures-to-stream.svg)](https://crates.io/crates/futures-to-stream)
 
 Macros to create streams from heterogeneous futures
 
