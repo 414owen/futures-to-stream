@@ -67,7 +67,7 @@ fn to_stream() -> impl Stream<Item = ()> {
 ```
 
 Great, very helpful rustc. We've created the exact same function under a different name,
-and it's [`Future`](https://docs.rs/futures/0.3.21/futures/future/trait.Future.html)
+and its [`Future`](https://docs.rs/futures/0.3.21/futures/future/trait.Future.html)
 is different somehow.
 
 Well, there is a way to combine two different futures pretty easily -- Use
